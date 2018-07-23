@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Rudi Timmermans
+# This file is distributed under the same license as the Zimbra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Zimbra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-19 19:25+0000\n"
+"PO-Revision-Date: 2018-07-23 19:57+0000\n"
+"Last-Translator: advocatux <advocatux@airpost.net>\n"
+"Language-Team: UBports Spanish Team\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../qml/QrCodeDialog.qml:11
+msgid "Close"
+msgstr "Cerrar"
+
+#: ../qml/AboutPage.qml:8
+msgid "About Zimbra v1.0"
+msgstr "Acerca de Zimbra v1.0"
+
+#: ../qml/AboutPage.qml:9
+msgid "This is a Zimbra Webmail Webapp for Ubuntu Touch."
+msgstr "Una webapp de Zimbra Webmail para Ubuntu Touch."
+
+#: ../qml/AboutPage.qml:13
+msgid ""
+"Copyright (c) 2018 <br> by Rudi Timmermans  <br><br> E-Mail: <a href="
+"\"mailto://rudi.timmer@mail.ch\">rudi.timmer@mail.ch</a>"
+msgstr ""
+"Copyright (c) 2018 <br> de Rudi Timmermans  <br><br> E-Mail: <a href="
+"\"mailto://rudi.timmer@mail.ch\">rudi.timmer@mail.ch</a>"
+
+#: ../qml/AboutPage.qml:17
+msgid "OK"
+msgstr "Aceptar"
+
+#: ../qml/actions/SaveImage.qml:22
+msgid "Save image"
+msgstr "Guardar imagen"
+
+#: ../qml/actions/CopyImage.qml:22
+msgid "Copy image"
+msgstr "Copiar imagen"
+
+#: ../qml/actions/ShareLink.qml:22
+msgid "Share…"
+msgstr "Compartir…"
+
+#: ../qml/actions/Copy.qml:22
+msgid "Copy"
+msgstr "Copiar"
+
+#: ../qml/actions/CopyLink.qml:22
+msgid "Copy link"
+msgstr "Copiar enlace"
+
+#: ../qml/SadPage.qml:27
+msgid "Oops, something went wrong. Reload from bottom menu."
+msgstr "Uy, algo salió mal. Recargue desde el menú inferior."
+
+#: ../qml/ErrorSheet.qml:18
+msgid "Network Error"
+msgstr "Error de red"
+
+#. TRANSLATORS: %1 refers to the URL of the current page
+#: ../qml/ErrorSheet.qml:24
+msgid "It appears you are having trouble viewing: %1."
+msgstr "Parece que tiene problemas viendo: %1."
+
+#: ../qml/ErrorSheet.qml:30
+msgid "Please check your network settings and try refreshing the page."
+msgstr "Compruebe su configuración de red y pruebe a recargar la página."
+
+#: ../qml/ErrorSheet.qml:35
+msgid "Refresh page"
+msgstr "Recargar la página" 
