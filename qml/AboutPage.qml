@@ -5,7 +5,7 @@ import Ubuntu.Components.Popups 1.3
 Dialog {
             id: aboutDialog
             visible: false
-            title: i18n.tr("About Zimbra v1.0")
+            title: i18n.tr("About Zimbra v1.1")
             text: i18n.tr("This is a Zimbra Webmail Webapp for Ubuntu Touch.")
 
             Text {
