@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Zimbra
+Name=Zimbra Client
 Exec=qmlscene %u qml/Main.qml --disable-gpu
 Icon=img/icon.png
 Terminal=false

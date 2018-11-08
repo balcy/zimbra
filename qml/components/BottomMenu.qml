@@ -29,7 +29,7 @@ Rectangle {
         }
 
         Item {
-            width: parent.width/4
+            width: parent.width/5
             height: parent.height
 
             Icon {
@@ -43,13 +43,13 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    webview.url = 'https://mail.kibots.com/m/zmain/'
+                    webview.url = settings.myUrl;
                 }
             }
         }         
         
         Item {
-            width: parent.width/4
+            width: parent.width/5
             height: parent.height
 
             Icon {
@@ -69,7 +69,7 @@ Rectangle {
         }
 
         Item {
-            width: parent.width/4
+            width: parent.width/5
             height: parent.height
 
             Icon {
@@ -89,7 +89,27 @@ Rectangle {
         }
 
         Item {
-            width: parent.width/4
+            width: parent.width/5
+            height: parent.height
+
+            Icon {
+                anchors.centerIn: parent
+                width: units.gu(3.2)
+                height: width
+                name: "settings"
+                color: "#000000"
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    PopupUtils.open(settingsComponent, root, {url: settings.myUrl});
+                }
+            }
+        }
+
+        Item {
+            width: parent.width/5
             height: parent.height
 
             Icon {

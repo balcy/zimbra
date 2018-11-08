@@ -7,6 +7,7 @@ import Ubuntu.UnityWebApps 0.1 as UnityWebApps
 import Ubuntu.Content 1.1
 import QtMultimedia 5.8
 import QtSystemInfo 5.0
+import Qt.labs.settings 1.0
 import "components"
 import "actions" as Actions
 import "."
@@ -30,6 +31,11 @@ MainView {
     property bool runningLocalApplication: false
     property bool openExternalUrlInOverlay: true
     property bool popupBlockerEnabled: true
+
+    Settings {
+        id: settings
+        property string myUrl
+    }
 
     Page {
         id: page
@@ -55,9 +61,26 @@ MainView {
 
             dataPath: dataLocation
 
-            userAgent: "Mozilla/5.0 (Linux; U; Android 4.1.1; es-; AVA-V470 Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"
+            userAgent: "Mozilla/5.0 (Linux; Android 5.0; Nexus 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.102 Mobile Safari/537.36"
 
             persistentCookiesPolicy: WebEngineProfile.ForcePersistentCookies
+            }
+
+        Timer {
+            id: checkUrlTimer
+            interval: 500
+            running: false
+            repeat: false
+        onTriggered: {
+            if (!settings.myUrl) {
+                PopupUtils.open(settingsComponent, root, {url: settings.myUrl});
+            }
+        }
+    }
+
+        Component.onCompleted: {
+          //Only start this after everything is safe, it's a bit hacky but it works
+          checkUrlTimer.start();
             }
 
             anchors {
@@ -68,7 +91,7 @@ MainView {
                 bottomMargin: units.gu(6)
             }
                 zoomFactor: 2.5
-                url: "https://mail.kibots.com/m/zmain"
+                url: settings.myUrl
 
                 userScripts: [
                     WebEngineScript {
@@ -105,6 +128,68 @@ MainView {
             }
 
         }
+
+    Component {
+        id: settingsComponent
+
+        Dialog {
+            id: settingsDialog
+            text: i18n.tr('Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.ubports.com).')
+
+            property alias url: address.text
+            onVisibleChanged: {
+                if (visible) {
+                    address.forceActiveFocus();
+                }
+            }
+
+            function saveUrl() {
+                var url = address.text;
+                if (url && url.substring(0, 7) != 'http://' && url.substring(0, 8) != 'https://') {
+                    url = 'https://' + url;
+                }
+
+                address.focus = false
+                settings.myUrl = url;
+                webview.url = settings.myUrl;
+                PopupUtils.close(settingsDialog);
+            }
+
+            TextField {
+                id: address
+                width: parent.width
+                inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
+
+                onAccepted: settingsDialog.saveUrl()
+            }
+
+            Button {
+                text: i18n.tr('OK')
+                color: UbuntuColors.green
+
+                onClicked: settingsDialog.saveUrl()
+            }
+        }
+    }
+
+    Connections {
+        target: Qt.inputMethod
+        onVisibleChanged: nav.visible = !nav.visible
+    }
+
+    Connections {
+        target: webview
+        onFullscreenRequested: webview.fullscreen = fullscreen
+
+        onFullscreenChanged: {
+                nav.visible = !webview.fullscreen
+                if (webview.fullscreen == true) {
+                    window.visibility = 5
+                } else {
+                    window.visibility = 4
+                }
+            }
+    }
 
         Loader {
             anchors {
