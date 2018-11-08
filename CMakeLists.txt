@@ -77,5 +77,3 @@ add_subdirectory(po)
 
 add_custom_target("Zimbra_ClickFiles" ALL SOURCES "zimbra.apparmor" "manifest.json.in")
 
-add_subdirectory(plugins)
-
