@@ -134,7 +134,7 @@ MainView {
 
         Dialog {
             id: settingsDialog
-            text: i18n.tr('Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.ubports.com/m).')
+            text: i18n.tr('Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.ubports.com).')
 
             property alias url: address.text
             onVisibleChanged: {
