@@ -12,7 +12,7 @@ Dialog {
                             left: parent.left
                             right: parent.right
                         }
-                        placeholderText: i18n.tr("https://zimbra.ubports.com")
+                        placeholderText: i18n.tr("https://zimbra.example.com")
                       
 
                     }
