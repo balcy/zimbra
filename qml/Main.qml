@@ -134,7 +134,7 @@ MainView {
 
         Dialog {
             id: settingsDialog
-            text: i18n.tr('Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.ubports.com).')
+            text: i18n.tr('Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.ubports.com/m).')
 
             property alias url: address.text
             onVisibleChanged: {
@@ -146,7 +146,7 @@ MainView {
             function saveUrl() {
                 var url = address.text;
                 if (url && url.substring(0, 7) != 'http://' && url.substring(0, 8) != 'https://') {
-                    url = 'https://' + url;
+                    url = 'https://' + url + '/m';
                 }
 
                 address.focus = false
@@ -237,5 +237,10 @@ MainView {
         width: parent.width
      }
    }
- }
+ 
+     Connections {
+        target: Qt.inputMethod
+        onVisibleChanged: nav.visible = !nav.visible
+    }
+  }
           
