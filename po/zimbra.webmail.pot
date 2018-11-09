@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-09 07:29+0000\n"
+"POT-Creation-Date: 2018-11-09 12:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgstr ""
 
 #: ../qml/Main.qml:137
 msgid ""
-"Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.ubports."
+"Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
 "com)."
 msgstr ""
 
