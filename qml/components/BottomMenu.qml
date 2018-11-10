@@ -29,7 +29,7 @@ Rectangle {
         }
 
         Item {
-            width: parent.width/5
+            width: parent.width/3
             height: parent.height
 
             Icon {
@@ -49,47 +49,7 @@ Rectangle {
         }         
         
         Item {
-            width: parent.width/5
-            height: parent.height
-
-            Icon {
-                anchors.centerIn: parent
-                width: units.gu(2.9)
-                height: width
-                name: "go-previous"
-                color: "#000000"
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    webview.goBack()
-                }
-            }
-        }
-
-        Item {
-            width: parent.width/5
-            height: parent.height
-
-            Icon {
-                anchors.centerIn: parent
-                width: units.gu(2.9)
-                height: width
-                name: "go-next"
-                color: "#000000"
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    webview.goForward()
-                }
-            }
-        }
-
-        Item {
-            width: parent.width/5
+            width: parent.width/3
             height: parent.height
 
             Icon {
@@ -109,7 +69,7 @@ Rectangle {
         }
 
         Item {
-            width: parent.width/5
+            width: parent.width/3
             height: parent.height
 
             Icon {
@@ -130,3 +90,4 @@ Rectangle {
         }
     }
 }
+

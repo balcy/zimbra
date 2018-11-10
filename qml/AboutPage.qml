@@ -5,7 +5,7 @@ import Ubuntu.Components.Popups 1.3
 Dialog {
             id: aboutDialog
             visible: false
-            title: i18n.tr("About Zimbra Client v1.5")
+            title: i18n.tr("About Zimbra Client v1.6")
             text: i18n.tr("This is a Zimbra Client for<br>Ubuntu Touch.")
 
             Text {
