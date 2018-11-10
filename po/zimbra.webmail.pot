@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-09 12:48+0000\n"
+"POT-Creation-Date: 2018-11-10 12:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,13 +46,13 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: ../qml/Main.qml:137
+#: ../qml/Main.qml:143
 msgid ""
 "Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
 "com)."
 msgstr ""
 
-#: ../qml/Main.qml:167 ../qml/SettingsDialog.qml:21 ../qml/AboutPage.qml:17
+#: ../qml/Main.qml:173 ../qml/SettingsDialog.qml:21 ../qml/AboutPage.qml:17
 msgid "OK"
 msgstr ""
 
@@ -110,7 +110,7 @@ msgid "https://zimbra.example.com"
 msgstr ""
 
 #: ../qml/AboutPage.qml:8
-msgid "About Zimbra Client v1.4"
+msgid "About Zimbra Client v1.5"
 msgstr ""
 
 #: ../qml/AboutPage.qml:9

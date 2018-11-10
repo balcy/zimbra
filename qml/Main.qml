@@ -53,6 +53,8 @@ MainView {
         WebEngineView {
             id: webview
 
+            property var currentWebview: webview
+
             WebEngineProfile {
             id: webContext 
 
@@ -128,6 +130,10 @@ MainView {
             }
 
         }
+
+        onNewViewRequested: function(request) {
+                Qt.openUrlExternally(request.requestedUrl);
+            }
 
     Component {
         id: settingsComponent
@@ -237,10 +243,5 @@ MainView {
         width: parent.width
      }
    }
- 
-     Connections {
-        target: Qt.inputMethod
-        onVisibleChanged: nav.visible = !nav.visible
-    }
-  }
+ }
           

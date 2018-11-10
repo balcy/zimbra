@@ -34,7 +34,7 @@ Rectangle {
 
             Icon {
                 anchors.centerIn: parent
-                width: units.gu(3.2)
+                width: units.gu(2.9)
                 height: width
                 name: "home"
                 color: "#000000"
@@ -54,7 +54,7 @@ Rectangle {
 
             Icon {
                 anchors.centerIn: parent
-                width: units.gu(3.2)
+                width: units.gu(2.9)
                 height: width
                 name: "go-previous"
                 color: "#000000"
@@ -74,7 +74,7 @@ Rectangle {
 
             Icon {
                 anchors.centerIn: parent
-                width: units.gu(3.2)
+                width: units.gu(2.9)
                 height: width
                 name: "go-next"
                 color: "#000000"
@@ -94,7 +94,7 @@ Rectangle {
 
             Icon {
                 anchors.centerIn: parent
-                width: units.gu(3.2)
+                width: units.gu(2.9)
                 height: width
                 name: "settings"
                 color: "#000000"
@@ -114,7 +114,7 @@ Rectangle {
 
             Icon {
                 anchors.centerIn: parent
-                width: units.gu(3.2)
+                width: units.gu(2.9)
                 height: width
                 name: "info"
                 color: "#000000"
