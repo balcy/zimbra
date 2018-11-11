@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-10 19:53+0000\n"
+"POT-Creation-Date: 2018-11-11 09:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,7 +110,7 @@ msgid "https://zimbra.example.com"
 msgstr ""
 
 #: ../qml/AboutPage.qml:8
-msgid "About Zimbra Client v1.6"
+msgid "About Zimbra Client v1.7"
 msgstr ""
 
 #: ../qml/AboutPage.qml:9

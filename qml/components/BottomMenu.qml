@@ -10,7 +10,7 @@ Rectangle {
     z: 100000
     width: parent.width
     height: units.gu(6)
-    color: "#FFFFFF"
+    color: "#888"
     anchors {
         bottom: parent.bottom
     }
@@ -37,7 +37,7 @@ Rectangle {
                 width: units.gu(2.9)
                 height: width
                 name: "home"
-                color: "#000000"
+                color: "#FFFFFF"
             }
             
             MouseArea {
@@ -57,7 +57,7 @@ Rectangle {
                 width: units.gu(2.9)
                 height: width
                 name: "settings"
-                color: "#000000"
+                color: "#FFFFFF"
             }
 
             MouseArea {
@@ -77,7 +77,7 @@ Rectangle {
                 width: units.gu(2.9)
                 height: width
                 name: "info"
-                color: "#000000"
+                color: "#FFFFFF"
             }
 
             MouseArea {
