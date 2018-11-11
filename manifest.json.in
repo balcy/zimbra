@@ -9,7 +9,7 @@
             "desktop":  "zimbra.desktop"
         }
     },
-    "version": "1.8",
+    "version": "1.9",
     "maintainer": "Rudi Timmermans <rudi.timmer@mail.ch>",
     "framework" : "ubuntu-sdk-16.04"
 }
