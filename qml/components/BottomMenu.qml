@@ -29,7 +29,7 @@ Rectangle {
         }
 
         Item {
-            width: parent.width/3
+            width: parent.width/4
             height: parent.height
 
             Icon {
@@ -46,10 +46,30 @@ Rectangle {
                     webview.url = settings.myUrl;
                 }
             }
+        } 
+
+        Item {
+            width: parent.width/4
+            height: parent.height
+
+            Icon {
+                anchors.centerIn: parent
+                width: units.gu(3.2)
+                height: width
+                name: "reload"
+                color: "#FFFFFF"
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    webview.reload()
+                }
+            }
         }         
         
         Item {
-            width: parent.width/3
+            width: parent.width/4
             height: parent.height
 
             Icon {
@@ -69,7 +89,7 @@ Rectangle {
         }
 
         Item {
-            width: parent.width/3
+            width: parent.width/4
             height: parent.height
 
             Icon {
