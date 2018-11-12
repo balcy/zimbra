@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-11 17:10+0000\n"
+"POT-Creation-Date: 2018-11-12 15:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,55 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../qml/AlertDialog.qml:6
+msgid "JavaScript Alert"
+msgstr ""
+
+#: ../qml/AlertDialog.qml:13 ../qml/PromptDialog.qml:24
+#: ../qml/HttpAuthenticationDialog.qml:46 ../qml/Main.qml:241
+#: ../qml/ConfirmDialog.qml:15 ../qml/SettingsDialog.qml:21
+#: ../qml/AboutPage.qml:22
+msgid "OK"
+msgstr ""
+
+#: ../qml/PromptDialog.qml:6
+msgid "JavaScript Prompt"
+msgstr ""
+
+#: ../qml/PromptDialog.qml:32 ../qml/HttpAuthenticationDialog.qml:53
+#: ../qml/ContentDownloadDialog.qml:94 ../qml/ConfirmDialog.qml:23
+msgid "Cancel"
+msgstr ""
+
+#: ../qml/HttpAuthenticationDialog.qml:7
+msgid "Authentication required."
+msgstr ""
+
+#. TRANSLATORS: %1 refers to the URL of the current website and %2 is a string that the website sends with more information about the authentication challenge (technically called "realm")
+#: ../qml/HttpAuthenticationDialog.qml:9
+msgid "The website at %1 requires authentication. The website says \"%2\""
+msgstr ""
+
+#: ../qml/HttpAuthenticationDialog.qml:32
+msgid "Username"
+msgstr ""
+
+#: ../qml/HttpAuthenticationDialog.qml:39
+msgid "Password"
+msgstr ""
+
+#: ../qml/BeforeUnloadDialog.qml:6
+msgid "Confirm Navigation"
+msgstr ""
+
+#: ../qml/BeforeUnloadDialog.qml:15
+msgid "Leave"
+msgstr ""
+
+#: ../qml/BeforeUnloadDialog.qml:23
+msgid "Stay"
+msgstr ""
 
 #: ../qml/MediaAccessDialog.qml:31
 msgid "Permission"
@@ -46,14 +95,10 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: ../qml/Main.qml:143
+#: ../qml/Main.qml:211
 msgid ""
 "Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
 "com)."
-msgstr ""
-
-#: ../qml/Main.qml:173 ../qml/SettingsDialog.qml:21 ../qml/AboutPage.qml:22
-msgid "OK"
 msgstr ""
 
 #: ../qml/actions/SaveImage.qml:22
@@ -97,8 +142,8 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-#: ../qml/ContentDownloadDialog.qml:94
-msgid "Cancel"
+#: ../qml/ConfirmDialog.qml:6
+msgid "JavaScript Confirmation"
 msgstr ""
 
 #: ../qml/SettingsDialog.qml:7
@@ -110,7 +155,7 @@ msgid "https://zimbra.example.com"
 msgstr ""
 
 #: ../qml/AboutPage.qml:8
-msgid "About Zimbra Client v1.9"
+msgid "About Zimbra Client v2.0"
 msgstr ""
 
 #: ../qml/AboutPage.qml:9

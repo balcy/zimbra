@@ -103,6 +103,46 @@ MainView {
            }
         ]
 
+
+    onJavaScriptDialogRequested: function(request) {
+
+        switch (request.type)
+        {
+            case JavaScriptDialogRequest.DialogTypeAlert:
+                request.accepted = true;
+                var alertDialog = PopupUtils.open(Qt.resolvedUrl("AlertDialog.qml"));
+                alertDialog.message = request.message;
+                alertDialog.accept.connect(request.dialogAccept);
+                break;
+
+            case JavaScriptDialogRequest.DialogTypeConfirm:
+                request.accepted = true;
+                var confirmDialog = PopupUtils.open(Qt.resolvedUrl("ConfirmDialog.qml"));
+                confirmDialog.message = request.message;
+                confirmDialog.accept.connect(request.dialogAccept);
+                confirmDialog.reject.connect(request.dialogReject);
+                break;
+
+            case JavaScriptDialogRequest.DialogTypePrompt:
+                request.accepted = true;
+                var promptDialog = PopupUtils.open(Qt.resolvedUrl("PromptDialog.qml"));
+                promptDialog.message = request.message;
+                promptDialog.defaultValue = request.defaultText;
+                promptDialog.accept.connect(request.dialogAccept);
+                promptDialog.reject.connect(request.dialogReject);
+                break;
+
+            case 3:
+                request.accepted = true;
+                var beforeUnloadDialog = PopupUtils.open(Qt.resolvedUrl("BeforeUnloadDialog.qml"));
+                beforeUnloadDialog.message = request.message;
+                beforeUnloadDialog.accept.connect(request.dialogAccept);
+                beforeUnloadDialog.reject.connect(request.dialogReject);
+                break;
+            }
+
+       }
+
             onFileDialogRequested: function(request) {
 
             switch (request.mode)
@@ -130,6 +170,34 @@ MainView {
             }
 
         }
+
+    onAuthenticationDialogRequested: function(request) {
+
+        switch (request.type)
+        {
+            //case WebEngineAuthenticationDialogRequest.AuthenticationTypeHTTP:
+            case 0:
+                request.accepted = true;
+                var authDialog = PopupUtils.open(Qt.resolvedUrl("HttpAuthenticationDialog.qml"), webview.currentWebview);
+                authDialog.host = UrlUtils.extractHost(request.url);
+                authDialog.realm = request.realm;
+                authDialog.accept.connect(request.dialogAccept);
+                authDialog.reject.connect(request.dialogReject);
+
+                break;
+
+            //case WebEngineAuthenticationDialogRequest.AuthenticationTypeProxy:
+            case 1:
+                request.accepted = false;
+                break;
+          }
+
+       }
+
+        onFullScreenRequested: function(request) {
+                webview.fullScreenRequested(request.toggleOn);
+                request.accept();
+            }
 
         onNewViewRequested: function(request) {
                 Qt.openUrlExternally(request.requestedUrl);
