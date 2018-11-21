@@ -1,40 +1,54 @@
-import QtQuick 2.9
-import Morph.Web 0.1
-import QtWebEngine 1.7
+import QtQuick 2.4
+import Ubuntu.Web 0.2
 import Ubuntu.Components 1.3
+import com.canonical.Oxide 1.19 as Oxide
 import Ubuntu.Components.Popups 1.3
-import Ubuntu.UnityWebApps 0.1 as UnityWebApps
+import "UCSComponents"
 import Ubuntu.Content 1.1
-import QtMultimedia 5.8
-import QtSystemInfo 5.0
-import Qt.labs.settings 1.0
-import "components"
 import "actions" as Actions
+import QtMultimedia 5.0
+import QtFeedback 5.0
+import Qt.labs.settings 1.0
+import Ubuntu.Unity.Action 1.1 as UnityActions
 import "."
+import DownloadInterceptor 1.0
 
 MainView {
     id: root
     objectName: "mainView"
-    ScreenSaver { screenSaverEnabled: false }
     theme.name: "Ubuntu.Components.Themes.Ambiance"
-
-    focus: true
 
     anchors {
         fill: parent
     }
 
     applicationName: "zimbra.webmail"
+
     anchorToKeyboard: true
     automaticOrientation: true
-    property bool blockOpenExternalUrls: false
-    property bool runningLocalApplication: false
-    property bool openExternalUrlInOverlay: true
-    property bool popupBlockerEnabled: true
 
+    property string myPattern: ""
     Settings {
         id: settings
         property string myUrl
+    }
+
+    property string myUA: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+
+    Timer {
+        id: checkUrlTimer
+        interval: 500
+        running: false
+        repeat: false
+        onTriggered: {
+            if (!settings.myUrl) {
+                PopupUtils.open(settingsComponent, root, {url: settings.myUrl});
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        checkUrlTimer.start();
     }
 
     Page {
@@ -50,40 +64,36 @@ MainView {
             bottom: parent.bottom
         }
 
-        WebEngineView {
-            id: webview
 
-            property var currentWebview: webview
-
-            WebEngineProfile {
-            id: webContext 
-
-            property alias userAgent: webContext.httpUserAgent
-            property alias dataPath: webContext.persistentStoragePath
-
-            dataPath: dataLocation
-
-            userAgent: "Mozilla/5.0 (Linux; Android 5.0; Nexus 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.102 Mobile Safari/537.36"
-
-            persistentCookiesPolicy: WebEngineProfile.ForcePersistentCookies
-            }
-
-        Timer {
-            id: checkUrlTimer
-            interval: 500
-            running: false
-            repeat: false
-        onTriggered: {
-            if (!settings.myUrl) {
-                PopupUtils.open(settingsComponent, root, {url: settings.myUrl});
-            }
+        HapticsEffect {
+            id: vibration
+            attackIntensity: 0.0
+            attackTime: 50
+            intensity: 1.0
+            duration: 10
+            fadeTime: 50
+            fadeIntensity: 0.0
         }
-    }
 
-        Component.onCompleted: {
-          //Only start this after everything is safe, it's a bit hacky but it works
-          checkUrlTimer.start();
-            }
+        SoundEffect {
+            id: clicksound
+            source: "../sounds/Click.wav"
+        }
+
+        WebContext {
+            id: webcontext
+            userAgent: myUA
+            userScripts: [
+                Oxide.UserScript {
+                    context: 'oxide://main-world'
+                    emulateGreasemonkey: true
+                    url: Qt.resolvedUrl('userscripts/injectcss.js')
+                }
+            ]
+        }
+
+        WebView {
+            id: webview
 
             anchors {
                 fill: parent
@@ -92,116 +102,200 @@ MainView {
                 margins: units.gu(0)
                 bottomMargin: units.gu(6)
             }
-                zoomFactor: 2.5
-                url: settings.myUrl
+            width: parent.width
+            height: parent.height
+            context: webcontext
+            url: settings.myUrl
 
-                userScripts: [
-                    WebEngineScript {
-                       name: "oxide://main-world"
-                       sourceUrl: Qt.resolvedUrl("js/injectcss.js")
-                       runOnSubframes: true
-           }
-        ]
+            preferences.localStorageEnabled: true
+            preferences.allowFileAccessFromFileUrls: true
+            preferences.allowUniversalAccessFromFileUrls: true
+            preferences.appCacheEnabled: true
+            preferences.javascriptCanAccessClipboard: true        
 
+            onDownloadRequested: {
+                console.log('download requested', request.url.toString(), request.suggestedFilename);
+                DownloadInterceptor.download(request.url, request.cookies, request.suggestedFilename, webcontext.userAgent);
 
-    onJavaScriptDialogRequested: function(request) {
-
-        switch (request.type)
-        {
-            case JavaScriptDialogRequest.DialogTypeAlert:
-                request.accepted = true;
-                var alertDialog = PopupUtils.open(Qt.resolvedUrl("AlertDialog.qml"));
-                alertDialog.message = request.message;
-                alertDialog.accept.connect(request.dialogAccept);
-                break;
-
-            case JavaScriptDialogRequest.DialogTypeConfirm:
-                request.accepted = true;
-                var confirmDialog = PopupUtils.open(Qt.resolvedUrl("ConfirmDialog.qml"));
-                confirmDialog.message = request.message;
-                confirmDialog.accept.connect(request.dialogAccept);
-                confirmDialog.reject.connect(request.dialogReject);
-                break;
-
-            case JavaScriptDialogRequest.DialogTypePrompt:
-                request.accepted = true;
-                var promptDialog = PopupUtils.open(Qt.resolvedUrl("PromptDialog.qml"));
-                promptDialog.message = request.message;
-                promptDialog.defaultValue = request.defaultText;
-                promptDialog.accept.connect(request.dialogAccept);
-                promptDialog.reject.connect(request.dialogReject);
-                break;
-
-            case 3:
-                request.accepted = true;
-                var beforeUnloadDialog = PopupUtils.open(Qt.resolvedUrl("BeforeUnloadDialog.qml"));
-                beforeUnloadDialog.message = request.message;
-                beforeUnloadDialog.accept.connect(request.dialogAccept);
-                beforeUnloadDialog.reject.connect(request.dialogReject);
-                break;
+                request.action = Oxide.NavigationRequest.ActionReject;
+                PopupUtils.open(downloadingDialog, root.mainView, { "fileName" : request.suggestedFilename })
             }
 
-       }
+            contextualActions: ActionList {
 
-            onFileDialogRequested: function(request) {
+            Action {
+             text: i18n.tr(webview.contextualData.href.toString())
+                    enabled: contextualData.herf.toString()
+              }
 
-            switch (request.mode)
-        {
-            case FileDialogRequest.FileModeOpen:
-                request.accepted = true;
-                var fileDialogSingle = PopupUtils.open(Qt.resolvedUrl("ContentPickerDialog.qml"));
-                fileDialogSingle.allowMultipleFiles = false;
-                fileDialogSingle.accept.connect(request.dialogAccept);
-                fileDialogSingle.reject.connect(request.dialogReject);
-                break;
+        Action {
+            text: i18n.tr("Copy Link")
+                   enabled: webview.contextualData.href.toString()
 
-            case FileDialogRequest.FileModeOpenMultiple:
-                request.accepted = true;
-                var fileDialogMultiple = PopupUtils.open(Qt.resolvedUrl("ContentPickerDialog.qml"));
-                fileDialogMultiple.allowMultipleFiles = true;
-                fileDialogMultiple.accept.connect(request.dialogAccept);
-                fileDialogMultiple.reject.connect(request.dialogReject);
-                break;
+                   //contextualData.href.toString()
+            onTriggered: Clipboard.push([webview.contextualData.href])
+              }
 
-            case FilealogRequest.FileModeUploadFolder:
-            case FileDialogRequest.FileModeSave:
-                request.accepted = false;
-                break;
+               Action {
+                  text: i18n.tr("Share Link")
+                  enabled: webview.contextualData.href.toString()
+                  onTriggered: {
+                      var component = Qt.createComponent("Share.qml")
+                      console.log("component..."+component.status)
+                      if (component.status == Component.Ready) {
+                          var share = component.createObject(webview)
+                          share.onDone.connect(share.destroy)
+                          share.shareLink(webview.contextualData.href.toString(), webview.contextualData.title)
+                      } else {
+                          console.log(component.errorString())
+                      }
+                  }
+                  }
+
+               Action {
+                  text: i18n.tr("Copy Image")
+                  enabled: webview.contextualData.img.toString()
+                  onTriggered: Clipboard.push([webview.contextualData.img])
+               }
+
+               Action {
+                   text: i18n.tr("Download Image")
+                   enabled: webview.contextualData.img.toString() && downloadLoader.status == Loader.Ready
+                   onTriggered: downloadLoader.item.downloadPicture(webview.contextualData.img)
+               }
             }
 
+	    Component {
+                id: downloadingDialog
+
+                DownloadingDialog {
+                    anchors.fill: parent
+                }
+            }
+
+            Component {
+                id: customDieDialogComponent
+
+                CustomDieDialog {
+                    id: customDieDialog
+                }
+            }
+
+            function navigationRequestedDelegate(request) {
+                var url = request.url.toString();
+
+                if (Conf.hapticLinks) {
+                    vibration.start()
+                }
+
+                if (Conf.audibleLinks) {
+                    clicksound.play()
+                }
+
+                if(isValid(url) == false) {
+                    console.warn("Opening remote: " + url);
+                    PopupUtils.open(customDieDialogComponent, url)
+                    request.action = Oxide.NavigationRequest.ActionReject
+                 }
+            }
+
+            Component.onCompleted: {
+                preferences.localStorageEnabled = true
+                if (Qt.application.arguments[2] != undefined ) {
+                    console.warn("got argument: " + Qt.application.arguments[1])
+                    if(isValid(Qt.application.arguments[1]) == true) {
+                        url = Qt.application.arguments[1]
+                    }
+                }
+
+                console.warn("url is: " + url)
+            }
+
+            onGeolocationPermissionRequested: { request.accept() }
+
+            Loader {
+                id: downloadLoader
+                source: "Downloader.qml"
+                asynchronous: true
+            }
+            
+            Loader {
+                id: filePickerLoader
+                source: "ContentPickerDialog.qml"
+                asynchronous: true
+            }
+            
+            filePicker: pickerComponent
+            
+        Loader {
+                anchors {
+                    fill: webview
+
+                }
+                active: webview &&
+                        (webProcessMonitor.crashed || (webProcessMonitor.killed && !webview.loading))
+                sourceComponent: SadPage {
+                    webview: webview
+                    objectName: "webviewSadPage"
+                }
+
+                WebProcessMonitor {
+                    id: webProcessMonitor
+                    webview: webview
+                }
+                asynchronous: true
+            }
+                Loader {
+            anchors {
+                fill: webview
+
+            }
+            sourceComponent: ErrorSheet {
+                visible: webview && webview.lastLoadFailed
+                url: webview ? webview.url : ""
+                onRefreshClicked: {
+                    if (webview)
+                        webview.reload()
+                }
+            }
+            asynchronous: true
+        }            
+
+            function isValid (url){
+                var pattern = myPattern.split(',');
+                for (var i=0; i<pattern.length; i++) {
+                    var tmpsearch = pattern[i].replace(/\*/g,'(.*)')
+                    var search = tmpsearch.replace(/^https\?:\/\//g, '(http|https):\/\/');
+                    if (url.match(search)) {
+                       return true;
+                    }
+                }
+                return false;
+            }
         }
 
-    onAuthenticationDialogRequested: function(request) {
-
-        switch (request.type)
-        {
-            //case WebEngineAuthenticationDialogRequest.AuthenticationTypeHTTP:
-            case 0:
-                request.accepted = true;
-                var authDialog = PopupUtils.open(Qt.resolvedUrl("HttpAuthenticationDialog.qml"), webview.currentWebview);
-                authDialog.host = UrlUtils.extractHost(request.url);
-                authDialog.realm = request.realm;
-                authDialog.accept.connect(request.dialogAccept);
-                authDialog.reject.connect(request.dialogReject);
-
-                break;
-
-            //case WebEngineAuthenticationDialogRequest.AuthenticationTypeProxy:
-            case 1:
-                request.accepted = false;
-                break;
-          }
-
-       }
-
-        onFullScreenRequested: function(request) {
-                webview.fullScreenRequested(request.toggleOn);
-                request.accept();
+        NewProgressBar {
+            webview: webview
+            width: parent.width + units.gu(5)
+            z: 2
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
             }
+        }
+        
+    Component {
+        id: openDialogComponent
 
-        onNewViewRequested: function(request) {
-                Qt.openUrlExternally(request.requestedUrl);
-            }
+        OpenDialog {
+            anchors.fill: parent
+     }
+   }      
+        
+    Component {
+        id: pickerComponent
+        PickerDialog {}
+    }
 
     Component {
         id: settingsComponent
@@ -245,13 +339,12 @@ MainView {
             }
         }
     }
-
+              
     Connections {
         target: Qt.inputMethod
         onVisibleChanged: nav.visible = !nav.visible
     }
-
-    Connections {
+        Connections {
         target: webview
         onFullscreenRequested: webview.fullscreen = fullscreen
 
@@ -264,52 +357,31 @@ MainView {
                 }
             }
     }
+    Connections {
+        target: UriHandler
+        onOpened: {
+            if (uris.length === 0 ) {
+                return;
+            }
+            webview.url = uris[0]
+            console.warn("uri-handler request")
+        }
+    }
+}
 
-        Loader {
-            anchors {
-                fill: popupWebview
-            }
-            active: webProcessMonitor.crashed || (webProcessMonitor.killed && !popupWebview.currentWebview.loading)
-            sourceComponent: SadPage {
-                webview: popupWebview
-                objectName: "overlaySadPage"
-            }
-            WebProcessMonitor {
-                id: webProcessMonitor
-                webview: popupWebview
-            }
-            asynchronous: true
-          }
-       }
-
-            Loader {
-                id: contentHandlerLoader
-                source: "ContentHandler.qml"
-                asynchronous: true
-            }
-         
-            Loader {
-                id: downloadLoader
-                source: "Downloader.qml"
-                asynchronous: true
-            }
-            
-            Loader {
-                id: filePickerLoader
-                source: "ContentPickerDialog.qml"
-                asynchronous: true
-            }
-
-            Loader {
-                id: downloadDialogLoader
-                source: "ContentDownloadDialog.qml"
-                asynchronous: true
-            }
-
-     BottomMenu {
+    BottomMenu {
         id: bottomMenu
         width: parent.width
      }
+
+    Connections {
+        target: DownloadInterceptor
+        onSuccess: {
+            PopupUtils.open(openDialogComponent, root, {'path': path});
+        }
+
+        onFail: {
+            PopupUtils.open(downloadFailedComponent, root, {'text': message});
+        }
+    }
    }
- }
-          

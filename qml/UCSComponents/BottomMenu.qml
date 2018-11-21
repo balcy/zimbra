@@ -66,7 +66,7 @@ Rectangle {
                     webview.reload()
                 }
             }
-        }         
+        }    
         
         Item {
             width: parent.width/4

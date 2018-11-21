@@ -2,7 +2,7 @@
     "name": "zimbra.webmail",
     "description": "Zimbra Client For Ubuntu Touch",
     "architecture": "armhf",
-    "title": "Zimbra Client",
+    "title": "Zimbra",
     "hooks": {
         "zimbra": {
             "apparmor": "zimbra.apparmor",
@@ -13,5 +13,3 @@
     "maintainer": "Rudi Timmermans <rudi.timmer@mail.ch>",
     "framework" : "ubuntu-sdk-16.04"
 }
-
-

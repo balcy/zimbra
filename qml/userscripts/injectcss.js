@@ -4,7 +4,7 @@ function handler(event) {
     var style = document.createElement('style');
     style.type = 'text/css';
     style.appendChild(document.createTextNode(
-        '.message-content { display: none;} ' 
+        '#nav { display: none;} ' 
     ));
 
     document.head.appendChild(style);

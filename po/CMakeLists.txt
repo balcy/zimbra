@@ -17,7 +17,7 @@ add_custom_target(${POT_FILE} ALL
         --from-code=UTF-8
         --c++ --qt --language=javascript --add-comments=TRANSLATORS
         --keyword=tr --keyword=tr:1,2 --keyword=N_ --keyword=_
-        --package-name='Zimbra'
+        --package-name='Zimbra Client'
         --copyright-holder='Rudi Timmermans'
         ${I18N_SRC_FILES}
     COMMAND ${CMAKE_COMMAND} -E copy ${POT_FILE} ${CMAKE_CURRENT_SOURCE_DIR})
