@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Rudi Timmermans
+# This file is distributed under the same license as the Zimbra package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Zimbra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-21 09:41+0000\n"
+"PO-Revision-Date: 2019-02-16 21:03+0100\n"
+"Last-Translator: advocatux <advocatux@airpost.net>\n"
+"Language-Team: UBports Spanish Team\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../qml/Main.qml:132
+msgid "Copy Link"
+msgstr "Copiar enlace"
+
+#: ../qml/Main.qml:140
+msgid "Share Link"
+msgstr "Compartir enlace"
+
+#: ../qml/Main.qml:156
+msgid "Copy Image"
+msgstr "Copiar imagen"
+
+#: ../qml/Main.qml:162
+msgid "Download Image"
+msgstr "Descargar imagen"
+
+#: ../qml/Main.qml:305
+msgid ""
+"Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
+"com)."
+msgstr ""
+"Introduzca el FQDN de su servidor Zimbra <br>(p.ej. zimbra.example.com)."
+
+#: ../qml/Main.qml:335 ../qml/AboutPage.qml:22
+msgid "OK"
+msgstr "Aceptar"
+
+#: ../qml/actions/SaveImage.qml:22
+msgid "Save image"
+msgstr "Guardar imagen"
+
+#: ../qml/actions/Copy.qml:22
+msgid "Copy"
+msgstr "Copiar"
+
+#: ../qml/actions/ShareLink.qml:22
+msgid "Share…"
+msgstr "Compartir…"
+
+#: ../qml/actions/CopyImage.qml:22
+msgid "Copy image"
+msgstr "Copiar imagen"
+
+#: ../qml/actions/CopyLink.qml:22
+msgid "Copy link"
+msgstr "Copiar enlace"
+
+#: ../qml/ErrorSheet.qml:18
+msgid "Network Error"
+msgstr "Error de red"
+
+#. TRANSLATORS: %1 refers to the URL of the current page
+#: ../qml/ErrorSheet.qml:24
+msgid "It appears you are having trouble viewing: %1."
+msgstr "Parece que tiene un problema visualizando: %1"
+
+#: ../qml/ErrorSheet.qml:30
+msgid "Please check your network settings and try refreshing the page."
+msgstr "Compruebe su configuración de red e intente cargar la página de nuevo."
+
+#: ../qml/ErrorSheet.qml:35
+msgid "Refresh page"
+msgstr "Recargar la página"
+
+#: ../qml/QrCodeDialog.qml:11 ../qml/DownloadingDialog.qml:31
+#: ../qml/DownloadingDialog.qml:50
+msgid "Close"
+msgstr "Cerrar"
+
+#: ../qml/SadPage.qml:27
+msgid "Oops, something went wrong. Reload from bottom menu."
+msgstr "Uy, algo fue mal. Vuelva a cargar desde el menú inferior."
+
+#: ../qml/DownloadingDialog.qml:9
+msgid "Download in progress"
+msgstr "Descarga en curso"
+
+#: ../qml/DownloadingDialog.qml:29
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../qml/AboutPage.qml:8
+msgid "About Zimbra Client v2.0"
+msgstr "Acerca del cliente de Zimbra v2.0"
+
+#: ../qml/AboutPage.qml:9
+msgid "This is a Zimbra Client for<br>Ubuntu Touch."
+msgstr "Un cliente de Zimbra<br>para Ubuntu Touch."
+
+#: ../qml/AboutPage.qml:13
+msgid ""
+"Copyright (c) 2018 <br> by Rudi Timmermans  <br><br> E-Mail: <a href="
+"\"mailto://rudi.timmer@mail.ch\">rudi.timmer@mail.ch</a>"
+msgstr ""
+"Copyright (c) 2018 <br> de Rudi Timmermans  <br><br> E-Mail: <a href="
+"\"mailto://rudi.timmer@mail.ch\">rudi.timmer@mail.ch</a>"
+
+#: ../qml/AboutPage.qml:17
+msgid "Donate"
+msgstr "Donar"
