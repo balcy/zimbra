@@ -1,5 +1,7 @@
-import QtQuick 2.4
+import QtQuick 2.9
 import Ubuntu.Web 0.2
+import QtWebEngine 1.7
+import QtQuick.Layouts 1.3
 import Ubuntu.Components 1.3
 import com.canonical.Oxide 1.19 as Oxide
 import Ubuntu.Components.Popups 1.3
@@ -33,7 +35,7 @@ MainView {
         property string myUrl
     }
 
-    property string myUA: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+    property string myUA: "Mozilla/5.0 (Linux; Android 5.0; Nexus 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.111 Mobile Safari/537.36 Ubuntu Touch"
 
     Timer {
         id: checkUrlTimer
@@ -59,11 +61,11 @@ MainView {
             height: units.dp(.5)
             z: 1
         }
+
         anchors {
             fill: parent
             bottom: parent.bottom
         }
-
 
         HapticsEffect {
             id: vibration
@@ -362,60 +364,10 @@ MainView {
     }
 }
 
-      ActionBar {
-        id: actionBar
-        anchors.right: parent.right
-        height: playerPageHeader.height
-        numberOfSlots: 1
-        actions: [
-        Action {
-          id: homeAction
-          text: i18n.tr("Home")
-          iconName: "home"
-          onTriggered: {
-            webview.url = settings.myUrl;
-          }
-        },
-
-        Action {
-          id: reloadAction
-          text: i18n.tr("Reload")
-          iconName: "reload"
-          onTriggered: {
-            webview.reload()
-          }
-        },
-
-        Action {
-          id: offlineAction
-          text: i18n.tr("Offline Mode (Soon)")
-          iconName: "cancel"
-          onTriggered: {
-            
-          }
-        },
-
-        Action {
-          id: settingsAction
-          text: i18n.tr("Settings")
-          iconName: "settings"
-          onTriggered: {
-            PopupUtils.open(settingsComponent, root, {url: settings.myUrl});
-          }
-        },
-
-        Action {
-          id: aboutAction
-          text: i18n.tr("About")
-          iconName: "info"
-          onTriggered: {
-            PopupUtils.open(Qt.resolvedUrl("AboutPage.qml")
-          )
-        }
-      }
-    ]
-  }
- 
+    BottomMenu {
+        id: bottomMenu
+        width: parent.width
+    }
 
     Connections {
         target: DownloadInterceptor

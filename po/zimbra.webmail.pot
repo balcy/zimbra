@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra Client\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-04 08:08+0000\n"
+"POT-Creation-Date: 2019-03-04 20:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,50 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:125
+#: ../qml/Main.qml:127
 msgid "Copy Link"
 msgstr ""
 
-#: ../qml/Main.qml:133
+#: ../qml/Main.qml:135
 msgid "Share Link"
 msgstr ""
 
-#: ../qml/Main.qml:149
+#: ../qml/Main.qml:151
 msgid "Copy Image"
 msgstr ""
 
-#: ../qml/Main.qml:155
+#: ../qml/Main.qml:157
 msgid "Download Image"
 msgstr ""
 
-#: ../qml/Main.qml:298
+#: ../qml/Main.qml:300
 msgid ""
 "Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
 "com)."
 msgstr ""
 
-#: ../qml/Main.qml:328 ../qml/AboutPage.qml:22
+#: ../qml/Main.qml:330 ../qml/OfflinePage.qml:20 ../qml/AboutPage.qml:35
 msgid "OK"
-msgstr ""
-
-#: ../qml/Main.qml:373
-msgid "Home"
-msgstr ""
-
-#: ../qml/Main.qml:382
-msgid "Reload"
-msgstr ""
-
-#: ../qml/Main.qml:391
-msgid "Offline Mode (Soon)"
-msgstr ""
-
-#: ../qml/Main.qml:400
-msgid "Settings"
-msgstr ""
-
-#: ../qml/Main.qml:409
-msgid "About"
 msgstr ""
 
 #: ../qml/actions/SaveImage.qml:22
@@ -117,20 +97,32 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../qml/AboutPage.qml:8
-msgid "About Zimbra Client v2.2"
+#: ../qml/OfflinePage.qml:9
+msgid "Offline Mode"
+msgstr ""
+
+#: ../qml/OfflinePage.qml:13
+msgid "This is a work in progress for Offline Mode use into Zimbra Client !"
 msgstr ""
 
 #: ../qml/AboutPage.qml:9
+msgid "About Zimbra Client v2.3"
+msgstr ""
+
+#: ../qml/AboutPage.qml:10
 msgid "This is a Zimbra Client for<br>Ubuntu Touch."
 msgstr ""
 
-#: ../qml/AboutPage.qml:13
+#: ../qml/AboutPage.qml:14
+msgid "Thanks to Jeroen Bots and Ewald Pierre for suggestions and testing!"
+msgstr ""
+
+#: ../qml/AboutPage.qml:20
 msgid ""
 "Copyright (c) 2018-2019 <br> by Rudi Timmermans  <br><br> E-Mail: <a href="
 "\"mailto://rudi.timmer@mail.ch\">rudi.timmer@mail.ch</a>"
 msgstr ""
 
-#: ../qml/AboutPage.qml:17
+#: ../qml/AboutPage.qml:27
 msgid "Donate"
 msgstr ""

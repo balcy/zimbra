@@ -64,4 +64,5 @@ qml/SadPage.qml \
 qml/WebProcessMonitor.qml \
 qml/config.js \
 qml/userscripts/injectcss.js \
-qml/AboutPage.qml
+qml/AboutPage.qml \
+qml/OfflinePage.qml
