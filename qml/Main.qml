@@ -83,13 +83,6 @@ MainView {
         WebContext {
             id: webcontext
             userAgent: myUA
-            userScripts: [
-                Oxide.UserScript {
-                    context: 'oxide://main-world'
-                    emulateGreasemonkey: true
-                    url: Qt.resolvedUrl('userscripts/injectcss.js')
-                }
-            ]
         }
 
         WebView {
@@ -369,10 +362,60 @@ MainView {
     }
 }
 
-    BottomMenu {
-        id: bottomMenu
-        width: parent.width
-     }
+      ActionBar {
+        id: actionBar
+        anchors.right: parent.right
+        height: playerPageHeader.height
+        numberOfSlots: 1
+        actions: [
+        Action {
+          id: homeAction
+          text: i18n.tr("Home")
+          iconName: "home"
+          onTriggered: {
+            webview.url = settings.myUrl;
+          }
+        },
+
+        Action {
+          id: reloadAction
+          text: i18n.tr("Reload")
+          iconName: "reload"
+          onTriggered: {
+            webview.reload()
+          }
+        },
+
+        Action {
+          id: offlineAction
+          text: i18n.tr("Offline Mode (Soon)")
+          iconName: "cancel"
+          onTriggered: {
+            
+          }
+        },
+
+        Action {
+          id: settingsAction
+          text: i18n.tr("Settings")
+          iconName: "settings"
+          onTriggered: {
+            PopupUtils.open(settingsComponent, root, {url: settings.myUrl});
+          }
+        },
+
+        Action {
+          id: aboutAction
+          text: i18n.tr("About")
+          iconName: "info"
+          onTriggered: {
+            PopupUtils.open(Qt.resolvedUrl("AboutPage.qml")
+          )
+        }
+      }
+    ]
+  }
+ 
 
     Connections {
         target: DownloadInterceptor
@@ -384,4 +427,4 @@ MainView {
             PopupUtils.open(downloadFailedComponent, root, {'text': message});
         }
     }
-   }
+ }
