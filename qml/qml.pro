@@ -23,7 +23,7 @@ OTHER_FILES += $${CONF_FILES} \
                gmail.desktop
 
 #specify where the config files are installed to
-config_files.path = /gmail
+config_files.path = /zimbra
 config_files.files += $${CONF_FILES}
 INSTALLS+=config_files
 
