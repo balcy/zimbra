@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra Client\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 07:03+0000\n"
+"POT-Creation-Date: 2019-03-05 08:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,7 +106,7 @@ msgid "This is a work in progress for Offline Mode use into Zimbra Client !"
 msgstr ""
 
 #: ../qml/AboutPage.qml:9
-msgid "About Zimbra Client v2.3"
+msgid "About Zimbra Client v2.4"
 msgstr ""
 
 #: ../qml/AboutPage.qml:10

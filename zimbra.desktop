@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Zimbra Client
-Exec=qmlscene --scaling %u qml/Main.qml
+Exec=qmlscene %u qml/Main.qml
 Icon=img/icon.png
 Terminal=false
 Type=Application
