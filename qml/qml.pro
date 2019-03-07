@@ -49,6 +49,7 @@ qml/actions/CopyImage.qml \
 qml/actions/CopyLink.qml \
 qml/actions/SaveImage.qml \
 qml/actions/ShareLink.qml \
+qml/ErrorSheet.qml \
 qml/MimeTypeMapper.js \
 qml/Downloader.qml \
 qml/FileExtensionMapper.js \

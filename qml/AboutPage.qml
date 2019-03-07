@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.1
 Dialog {
             id: aboutDialog
             visible: false
-            title: i18n.tr("About Zimbra Client v2.5")
+            title: i18n.tr("About Zimbra Client v2.6 Beta")
             text: i18n.tr("This is a Zimbra Client for<br>Ubuntu Touch.")
 
             Text {

@@ -247,12 +247,19 @@ MainView {
                 Loader {
             anchors {
                 fill: webview
-
             }
 
-            asynchronous: true
-            }            
-
+           sourceComponent: ErrorSheet {
+                visible: webview && webview.lastLoadFailed
+                url: webview ? webview.url : ""
+                onRefreshClicked: {
+                    if (webview)
+                        webview.reload()
+                }
+            }
+                asynchronous: true
+            }   
+            
             function isValid (url){
                 var pattern = myPattern.split(',');
                 for (var i=0; i<pattern.length; i++) {

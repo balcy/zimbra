@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra Client\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-07 13:22+0000\n"
+"POT-Creation-Date: 2019-03-07 19:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,13 +33,13 @@ msgstr ""
 msgid "Download Image"
 msgstr ""
 
-#: ../qml/Main.qml:297
+#: ../qml/Main.qml:304
 msgid ""
 "Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
 "com)."
 msgstr ""
 
-#: ../qml/Main.qml:327 ../qml/OfflinePage.qml:63 ../qml/AboutPage.qml:35
+#: ../qml/Main.qml:334 ../qml/OfflinePage.qml:63 ../qml/AboutPage.qml:35
 msgid "OK"
 msgstr ""
 
@@ -61,6 +61,23 @@ msgstr ""
 
 #: ../qml/actions/CopyLink.qml:22
 msgid "Copy link"
+msgstr ""
+
+#: ../qml/ErrorSheet.qml:18
+msgid "Network Error"
+msgstr ""
+
+#: ../qml/ErrorSheet.qml:23
+msgid "It appears you are having trouble connecting your Zimbra Server."
+msgstr ""
+
+#: ../qml/ErrorSheet.qml:29
+msgid ""
+"Please check your network settings and try reconnect to your Zimbra Server."
+msgstr ""
+
+#: ../qml/ErrorSheet.qml:37
+msgid "Reconnect"
 msgstr ""
 
 #: ../qml/QrCodeDialog.qml:11 ../qml/DownloadingDialog.qml:31
@@ -113,7 +130,7 @@ msgid "4. Done."
 msgstr ""
 
 #: ../qml/AboutPage.qml:9
-msgid "About Zimbra Client v2.5"
+msgid "About Zimbra Client v2.6 Beta"
 msgstr ""
 
 #: ../qml/AboutPage.qml:10
