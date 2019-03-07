@@ -100,7 +100,13 @@ MainView {
             width: parent.width
             height: parent.height
             context: webcontext
-            url: settings.myUrl        
+            url: settings.myUrl 
+
+                preferences.localStorageEnabled: true
+                preferences.appCacheEnabled: true
+                preferences.allowFileAccessFromFileUrls: true
+                preferences.allowUniversalAccessFromFileUrls: true
+                preferences.javascriptCanAccessClipboard: true    
 
             onDownloadRequested: {
                 console.log('download requested', request.url.toString(), request.suggestedFilename);
@@ -190,13 +196,9 @@ MainView {
 
             Component.onCompleted: {
 
-                preferences.localStorageEnabled = true
-                preferences.pluginsEnabled = true
                 preferences.offlineWebApplicationCacheEnabled = true
-                preferences.allowFileAccessFromFileUrls = true
-                preferences.allowUniversalAccessFromFileUrls = true
-                preferences.javascriptCanAccessClipboard = true
                 preferences.javaEnabled = true
+                preferences.pluginsEnabled = true
 
                 if (Qt.application.arguments[2] != undefined ) {
                     console.warn("got argument: " + Qt.application.arguments[1])

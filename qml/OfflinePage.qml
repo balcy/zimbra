@@ -6,11 +6,11 @@ import QtQuick.Layouts 1.1
 Dialog {
             id: offlineDialog
             visible: false
-            title: i18n.tr("How to Enable Offline Mode")
+            title: i18n.tr("How to Enable Offline Mode on PC Client")
 
             Text {
                 wrapMode: Text.WordWrap
-                text: i18n.tr('If you use the Zimbra Web Client in Chrome or Firefox, you can work offline with access to one month of data!')
+                text: i18n.tr('If you use the Zimbra PC Web Client in Chrome or Firefox, you can work offline with access to one month of data!')
             }
 
             Text {

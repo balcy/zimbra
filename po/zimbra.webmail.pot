@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra Client\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-07 12:29+0000\n"
+"POT-Creation-Date: 2019-03-07 13:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,29 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:121
+#: ../qml/Main.qml:127
 msgid "Copy Link"
 msgstr ""
 
-#: ../qml/Main.qml:129
+#: ../qml/Main.qml:135
 msgid "Share Link"
 msgstr ""
 
-#: ../qml/Main.qml:145
+#: ../qml/Main.qml:151
 msgid "Copy Image"
 msgstr ""
 
-#: ../qml/Main.qml:151
+#: ../qml/Main.qml:157
 msgid "Download Image"
 msgstr ""
 
-#: ../qml/Main.qml:295
+#: ../qml/Main.qml:297
 msgid ""
 "Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
 "com)."
 msgstr ""
 
-#: ../qml/Main.qml:325 ../qml/OfflinePage.qml:63 ../qml/AboutPage.qml:35
+#: ../qml/Main.qml:327 ../qml/OfflinePage.qml:63 ../qml/AboutPage.qml:35
 msgid "OK"
 msgstr ""
 
@@ -81,13 +81,13 @@ msgid "Cancel"
 msgstr ""
 
 #: ../qml/OfflinePage.qml:9
-msgid "How to Enable Offline Mode"
+msgid "How to Enable Offline Mode on PC Client"
 msgstr ""
 
 #: ../qml/OfflinePage.qml:13
 msgid ""
-"If you use the Zimbra Web Client in Chrome or Firefox, you can work offline "
-"with access to one month of data!"
+"If you use the Zimbra PC Web Client in Chrome or Firefox, you can work "
+"offline with access to one month of data!"
 msgstr ""
 
 #: ../qml/OfflinePage.qml:18
