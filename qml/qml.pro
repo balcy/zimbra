@@ -39,10 +39,10 @@ target.path = $${UBUNTU_CLICK_BINARY_PATH}
 INSTALLS+=target
 
 DISTFILES += \
-qml/UCSComponents/EmptyState.qml \
-qml/UCSComponents/RadialAction.qml \
-qml/UCSComponents/RadialBottomEdge.qml \
-qml/UCSComponents/BottomMenu.qml \
+qml/components/EmptyState.qml \
+qml/components/RadialAction.qml \
+qml/components/RadialBottomEdge.qml \
+qml/components/BottomMenu.qml \
 qml/Main.qml \
 qml/actions/Copy.qml \
 qml/actions/CopyImage.qml \
@@ -59,7 +59,6 @@ qml/Share.qml \
 qml/PickerDialog.qml \
 qml/OpenDialog.qml \
 qml/ContentPickerDialog \
-qml/ErrorSheet.qml \
 qml/SadPage.qml \
 qml/WebProcessMonitor.qml \
 qml/config.js \

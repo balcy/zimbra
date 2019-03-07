@@ -77,7 +77,7 @@ Rectangle {
                 anchors.centerIn: parent
                 width: units.gu(2.9)
                 height: width
-                name: "switch"
+                name: "help"
                 color: "#FFFFFF"
             }
 

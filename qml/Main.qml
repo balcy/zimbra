@@ -5,13 +5,13 @@ import QtQuick.Layouts 1.3
 import Ubuntu.Components 1.3
 import com.canonical.Oxide 1.19 as Oxide
 import Ubuntu.Components.Popups 1.3
-import "UCSComponents"
 import Ubuntu.Content 1.1
-import "actions" as Actions
 import QtMultimedia 5.0
 import QtFeedback 5.0
 import Qt.labs.settings 1.0
 import Ubuntu.Unity.Action 1.1 as UnityActions
+import "components"
+import "actions" as Actions
 import "."
 import DownloadInterceptor 1.0
 
@@ -100,13 +100,7 @@ MainView {
             width: parent.width
             height: parent.height
             context: webcontext
-            url: settings.myUrl
-
-            preferences.localStorageEnabled: true
-            preferences.allowFileAccessFromFileUrls: true
-            preferences.allowUniversalAccessFromFileUrls: true
-            preferences.appCacheEnabled: true
-            preferences.javascriptCanAccessClipboard: true        
+            url: settings.myUrl        
 
             onDownloadRequested: {
                 console.log('download requested', request.url.toString(), request.suggestedFilename);
@@ -195,7 +189,15 @@ MainView {
             }
 
             Component.onCompleted: {
+
                 preferences.localStorageEnabled = true
+                preferences.pluginsEnabled = true
+                preferences.offlineWebApplicationCacheEnabled = true
+                preferences.allowFileAccessFromFileUrls = true
+                preferences.allowUniversalAccessFromFileUrls = true
+                preferences.javascriptCanAccessClipboard = true
+                preferences.javaEnabled = true
+
                 if (Qt.application.arguments[2] != undefined ) {
                     console.warn("got argument: " + Qt.application.arguments[1])
                     if(isValid(Qt.application.arguments[1]) == true) {
@@ -245,16 +247,9 @@ MainView {
                 fill: webview
 
             }
-            sourceComponent: ErrorSheet {
-                visible: webview && webview.lastLoadFailed
-                url: webview ? webview.url : ""
-                onRefreshClicked: {
-                    if (webview)
-                        webview.reload()
-                }
-            }
+
             asynchronous: true
-        }            
+            }            
 
             function isValid (url){
                 var pattern = myPattern.split(',');
