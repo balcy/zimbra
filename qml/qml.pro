@@ -1,11 +1,11 @@
 TEMPLATE = app
-TARGET = gmail
+TARGET = zimbra
 
 load(ubuntu-click)
 
 QT += qml quick
 
-SOURCES += main.cpp
+SOURCES += main.cpp 
 
 QML_FILES += $$files(*.qml,true) \
              $$files(*.js,true)

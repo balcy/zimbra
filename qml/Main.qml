@@ -340,23 +340,6 @@ MainView {
     }
               
     Connections {
-        target: Qt.inputMethod
-        onVisibleChanged: nav.visible = !nav.visible
-    }
-        Connections {
-        target: webview
-        onFullscreenRequested: webview.fullscreen = fullscreen
-
-        onFullscreenChanged: {
-                nav.visible = !webview.fullscreen
-                if (webview.fullscreen == true) {
-                    window.visibility = 5
-                } else {
-                    window.visibility = 4
-                }
-            }
-    }
-    Connections {
         target: UriHandler
         onOpened: {
             if (uris.length === 0 ) {

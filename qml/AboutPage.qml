@@ -1,4 +1,4 @@
-import QtQuick 2.4
+import QtQuick 2.9
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import QtQuick.Layouts 1.1
@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.1
 Dialog {
             id: aboutDialog
             visible: false
-            title: i18n.tr("About Zimbra Client v2.6 Beta")
+            title: i18n.tr("About Zimbra Client v2.6")
             text: i18n.tr("This is a Zimbra Client for<br>Ubuntu Touch.")
 
             Text {
