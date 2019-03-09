@@ -9,6 +9,12 @@ Dialog {
             title: i18n.tr("About Zimbra Client v2.7")
             text: i18n.tr("This is a Zimbra Client for<br>Ubuntu Touch.")
 
+            Image {
+                anchors.horizontalCenter: parent     
+                source: '../img/about.png'
+                fillMode: Image.PreserveAspectFit 
+            }
+
             Text {
                 wrapMode: Text.WordWrap
                 text: i18n.tr('Thanks to Jeroen Bots and Ewald Pierre for suggestions and testing!')

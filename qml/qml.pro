@@ -10,8 +10,9 @@ SOURCES += main.cpp
 QML_FILES += $$files(*.qml,true) \
              $$files(*.js,true)
 
-CONF_FILES +=  gmail.apparmor \
-               img/icon.png
+CONF_FILES +=  zimbra.apparmor \
+               img/icon.png \
+               img/about.png
 
 AP_TEST_FILES += tests/autopilot/run \
                  $$files(tests/*.py,true)
@@ -20,7 +21,7 @@ AP_TEST_FILES += tests/autopilot/run \
 OTHER_FILES += $${CONF_FILES} \
                $${QML_FILES} \
                $${AP_TEST_FILES} \
-               gmail.desktop
+               zimbra.desktop
 
 #specify where the config files are installed to
 config_files.path = /zimbra
