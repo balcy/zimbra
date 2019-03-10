@@ -100,13 +100,7 @@ MainView {
             width: parent.width
             height: parent.height
             context: webcontext
-            url: settings.myUrl 
-
-                preferences.localStorageEnabled: true
-                preferences.appCacheEnabled: true
-                preferences.allowFileAccessFromFileUrls: true
-                preferences.allowUniversalAccessFromFileUrls: true
-                preferences.javascriptCanAccessClipboard: true    
+            url: settings.myUrl    
 
             onDownloadRequested: {
                 console.log('download requested', request.url.toString(), request.suggestedFilename);
@@ -199,6 +193,11 @@ MainView {
                 preferences.offlineWebApplicationCacheEnabled = true
                 preferences.javaEnabled = true
                 preferences.pluginsEnabled = true
+                preferences.localStorageEnabled = true
+                preferences.appCacheEnabled = true
+                preferences.allowFileAccessFromFileUrls = true
+                preferences.allowUniversalAccessFromFileUrls = true
+                preferences.javascriptCanAccessClipboard = true 
 
                 if (Qt.application.arguments[2] != undefined ) {
                     console.warn("got argument: " + Qt.application.arguments[1])
@@ -313,7 +312,7 @@ MainView {
             function saveUrl() {
                 var url = address.text;
                 if (url && url.substring(0, 7) != 'http://' && url.substring(0, 8) != 'https://') {
-                    url = 'https://' + url + '/m';
+                    url = 'https://' + url;
                 }
 
                 address.focus = false

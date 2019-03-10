@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra Client\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-09 14:54+0000\n"
+"POT-Creation-Date: 2019-03-10 11:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,29 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:127
+#: ../qml/Main.qml:121
 msgid "Copy Link"
 msgstr ""
 
-#: ../qml/Main.qml:135
+#: ../qml/Main.qml:129
 msgid "Share Link"
 msgstr ""
 
-#: ../qml/Main.qml:151
+#: ../qml/Main.qml:145
 msgid "Copy Image"
 msgstr ""
 
-#: ../qml/Main.qml:157
+#: ../qml/Main.qml:151
 msgid "Download Image"
 msgstr ""
 
-#: ../qml/Main.qml:304
+#: ../qml/Main.qml:303
 msgid ""
 "Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
 "com)."
 msgstr ""
 
-#: ../qml/Main.qml:334 ../qml/OfflinePage.qml:63 ../qml/AboutPage.qml:41
+#: ../qml/Main.qml:333 ../qml/OfflinePage.qml:63 ../qml/AboutPage.qml:41
 msgid "OK"
 msgstr ""
 
@@ -130,7 +130,7 @@ msgid "4. Done."
 msgstr ""
 
 #: ../qml/AboutPage.qml:9
-msgid "About Zimbra Client v2.7"
+msgid "About Zimbra Client v2.8"
 msgstr ""
 
 #: ../qml/AboutPage.qml:10
