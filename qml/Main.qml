@@ -9,6 +9,7 @@ import QtMultimedia 5.8
 import QtSystemInfo 5.0
 import QtQml.Models 2.1
 import Qt.labs.settings 1.0
+import Ubuntu.DownloadManager 1.2
 import "components"
 import "actions" as Actions
 import "."
