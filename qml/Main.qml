@@ -83,8 +83,6 @@ MainView {
             property alias userAgent: webContext.httpUserAgent
             property alias dataPath: webContext.persistentStoragePath
 
-            signal showDownloadDialog(string downloadId, var contentType, var downloader, string filename, string mimeType)
-
             dataPath: dataLocation
 
             userAgent: myUA
