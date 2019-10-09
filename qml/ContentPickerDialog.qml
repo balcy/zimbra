@@ -5,7 +5,7 @@ import Ubuntu.Content 1.3
 import "MimeTypeMapper.js" as MimeTypeMapper
 import "."
 
-Component {
+//Component {
     Popups.PopupBase {
         id: picker
         objectName: "contentPickerDialog"
@@ -16,6 +16,13 @@ Component {
         parent: QuickUtils.rootItem(this)
 
         property var activeTransfer
+        property bool allowMultipleFiles
+        
+        signal accept(var files)
+        signal reject()
+
+        onAccept: hide()
+        onReject: hide()
 
         Rectangle {
             anchors.fill: parent
@@ -33,17 +40,36 @@ Component {
                 handler: ContentHandler.Source
 
                 onPeerSelected: {
-                    if (model.allowMultipleFiles) {
-                        peer.selectionType = ContentTransfer.Multiple
+                    
+                    /*
+                    if (peer.appId == "morph-browser") {
+                        // If we're inside the browser and the user has
+                        // requested content from the browser then we
+                        // need to handle the transfer internally
+                        var downloadsPage = picker.WebView.view.showDownloadsPage()
+                        downloadsPage.mimetypeFilter = MimeTypeMapper.mimeTypeRegexForContentType(contentType)
+                        downloadsPage.multiSelect = model.allowMultipleFiles
+                        downloadsPage.selectMode = false
+                        downloadsPage.pickingMode = true
+                        downloadsPage.internalFilePicker = model
+                        Popups.PopupUtils.close(picker)
                     } else {
-                        peer.selectionType = ContentTransfer.Single
-                    }
-                    picker.activeTransfer = peer.request()
-                    stateChangeConnection.target = picker.activeTransfer
+                    */
+                        if (allowMultipleFiles) {
+                            peer.selectionType = ContentTransfer.Multiple
+                        } else {
+                            peer.selectionType = ContentTransfer.Single
+                        }
+                        picker.activeTransfer = peer.request()
+                        stateChangeConnection.target = picker.activeTransfer
+                    
+                     /*
+                      }
+                     */
                 }
 
                 onCancelPressed: {
-                    model.reject()
+                    reject()
                 }
             }
         }
@@ -55,9 +81,17 @@ Component {
                 if (picker.activeTransfer.state === ContentTransfer.Charged) {
                     var selectedItems = []
                     for(var i in picker.activeTransfer.items) {
+                        
+                        // ContentTransfer.Single seems not to be handled properly, e.g. selected items with file manager
+                        // -> only select the first item
+                        if ((i > 0) && ! allowMultipleFiles)
+                        {
+                            break;
+                        }
+                        
                         selectedItems.push(String(picker.activeTransfer.items[i].url).replace("file://", ""))
                     }
-                    model.accept(selectedItems)
+                    accept(selectedItems)
                 }
             }
         }
@@ -76,5 +110,5 @@ Component {
             show()
         }
     }
-}
+//}
 
