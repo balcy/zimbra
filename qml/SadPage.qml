@@ -24,10 +24,15 @@ Rectangle {
 
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
-            text:  i18n.tr("Oops, something went wrong. Reload from bottom menu.")
-            color: "black"
+            text: webview ? i18n.tr("Oops, something went wrong.") : ""
         }
 
-      
+        Button {
+            anchors.horizontalCenter: parent.horizontalCenter
+            objectName: "reloadButton"
+            text: i18n.tr("Reload")
+            color: theme.palette.normal.positive
+            onClicked: webview.reload()
+        }
     }
 }

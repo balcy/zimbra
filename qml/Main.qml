@@ -1,33 +1,37 @@
 import QtQuick 2.9
-import Ubuntu.Web 0.2
+import Morph.Web 0.1
 import QtWebEngine 1.7
-import QtQuick.Layouts 1.3
 import Ubuntu.Components 1.3
-import com.canonical.Oxide 1.19 as Oxide
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.UnityWebApps 0.1 as UnityWebApps
 import Ubuntu.Content 1.1
-import QtMultimedia 5.0
-import QtFeedback 5.0
+import QtMultimedia 5.8
+import QtSystemInfo 5.0
+import QtQml.Models 2.1
 import Qt.labs.settings 1.0
-import Ubuntu.Unity.Action 1.1 as UnityActions
 import "components"
 import "actions" as Actions
 import "."
-import DownloadInterceptor 1.0
 
 MainView {
     id: root
     objectName: "mainView"
     theme.name: "Ubuntu.Components.Themes.Ambiance"
+    focus: true
 
     anchors {
         fill: parent
     }
 
     applicationName: "zimbra.webmail"
-
     anchorToKeyboard: true
     automaticOrientation: true
+    property bool blockOpenExternalUrls: false
+    property bool runningLocalApplication: false
+    property bool openExternalUrlInOverlay: true
+    property bool popupBlockerEnabled: true
+    
+    property string appVersion : "v3.0"
 
     property string myPattern: ""
     Settings {
@@ -35,7 +39,8 @@ MainView {
         property string myUrl
     }
 
-    property string myUA: "Mozilla/5.0 (iPhone; CPU iPhone OS 12_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1"
+    //property string myUA: "Mozilla/5.0 (iPhone; CPU iPhone OS 12_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1"
+    property string myUA: "Mozilla/5.0 (iPhone; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.25 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
 
     Timer {
         id: checkUrlTimer
@@ -53,6 +58,7 @@ MainView {
         checkUrlTimer.start();
     }
 
+
     Page {
         id: page
         header: Rectangle {
@@ -66,151 +72,120 @@ MainView {
             fill: parent
             bottom: parent.bottom
         }
-
-        HapticsEffect {
-            id: vibration
-            attackIntensity: 0.0
-            attackTime: 50
-            intensity: 1.0
-            duration: 10
-            fadeTime: 50
-            fadeIntensity: 0.0
-        }
-
-        SoundEffect {
-            id: clicksound
-            source: "../sounds/Click.wav"
-        }
-
-        WebContext {
-            id: webcontext
-            userAgent: myUA
-        }
-
-        WebView {
+                   
+        WebEngineView {
             id: webview
+
+            WebEngineProfile {
+            id: webContext 
+
+            property alias userAgent: webContext.httpUserAgent
+            property alias dataPath: webContext.persistentStoragePath
+
+            signal showDownloadDialog(string downloadId, var contentType, var downloader, string filename, string mimeType)
+
+            dataPath: dataLocation
+
+            userAgent: myUA
+
+            persistentCookiesPolicy: WebEngineProfile.ForcePersistentCookies
+
+            }
 
             anchors {
                 fill: parent
                 right: parent.right
                 bottom: parent.bottom
                 margins: units.gu(0)
-                bottomMargin: units.gu(6)
-            }
-            width: parent.width
-            height: parent.height
-            context: webcontext
-            url: settings.myUrl    
-
-            onDownloadRequested: {
-                console.log('download requested', request.url.toString(), request.suggestedFilename);
-                DownloadInterceptor.download(request.url, request.cookies, request.suggestedFilename, webcontext.userAgent);
-
-                request.action = Oxide.NavigationRequest.ActionReject;
-                PopupUtils.open(downloadingDialog, root.mainView, { "fileName" : request.suggestedFilename })
+                bottomMargin: units.gu(0)
             }
 
-            contextualActions: ActionList {
+                zoomFactor: 2.5
+                url: settings.myUrl
 
-            Action {
-             text: i18n.tr(webview.contextualData.href.toString())
-                    enabled: contextualData.herf.toString()
-              }
+            onFileDialogRequested: function(request) {
 
-        Action {
-            text: i18n.tr("Copy Link")
-                   enabled: webview.contextualData.href.toString()
+            switch (request.mode)
+        {
+            case FileDialogRequest.FileModeOpen:
+                request.accepted = true;
+                var fileDialogSingle = PopupUtils.open(Qt.resolvedUrl("ContentPickerDialog.qml"));
+                fileDialogSingle.allowMultipleFiles = false;
+                fileDialogSingle.accept.connect(request.dialogAccept);
+                fileDialogSingle.reject.connect(request.dialogReject);
+                break;
 
-                   //contextualData.href.toString()
-            onTriggered: Clipboard.push([webview.contextualData.href])
-              }
+            case FileDialogRequest.FileModeOpenMultiple:
+                request.accepted = true;
+                var fileDialogMultiple = PopupUtils.open(Qt.resolvedUrl("ContentPickerDialog.qml"));
+                fileDialogMultiple.allowMultipleFiles = true;
+                fileDialogMultiple.accept.connect(request.dialogAccept);
+                fileDialogMultiple.reject.connect(request.dialogReject);
+                break;
 
-               Action {
-                  text: i18n.tr("Share Link")
-                  enabled: webview.contextualData.href.toString()
-                  onTriggered: {
-                      var component = Qt.createComponent("Share.qml")
-                      console.log("component..."+component.status)
-                      if (component.status == Component.Ready) {
-                          var share = component.createObject(webview)
-                          share.onDone.connect(share.destroy)
-                          share.shareLink(webview.contextualData.href.toString(), webview.contextualData.title)
-                      } else {
-                          console.log(component.errorString())
-                      }
-                  }
-                  }
-
-               Action {
-                  text: i18n.tr("Copy Image")
-                  enabled: webview.contextualData.img.toString()
-                  onTriggered: Clipboard.push([webview.contextualData.img])
-               }
-
-               Action {
-                   text: i18n.tr("Download Image")
-                   enabled: webview.contextualData.img.toString() && downloadLoader.status == Loader.Ready
-                   onTriggered: downloadLoader.item.downloadPicture(webview.contextualData.img)
-               }
+            case FilealogRequest.FileModeUploadFolder:
+            case FileDialogRequest.FileModeSave:
+                request.accepted = false;
+                break;
             }
 
-	    Component {
-                id: downloadingDialog
+        }
 
-                DownloadingDialog {
-                    anchors.fill: parent
-                }
+        onNewViewRequested: function(request) {
+                Qt.openUrlExternally(request.requestedUrl);
             }
 
-            Component {
-                id: customDieDialogComponent
-
-                CustomDieDialog {
-                    id: customDieDialog
-                }
+        Loader {
+            anchors {
+                fill: popupWebview
             }
-
-            function navigationRequestedDelegate(request) {
-                var url = request.url.toString();
-
-                if (Conf.hapticLinks) {
-                    vibration.start()
-                }
-
-                if (Conf.audibleLinks) {
-                    clicksound.play()
-                }
-
-                if(isValid(url) == false) {
-                    console.warn("Opening remote: " + url);
-                    PopupUtils.open(customDieDialogComponent, url)
-                    request.action = Oxide.NavigationRequest.ActionReject
-                 }
+            active: webProcessMonitor.crashed || (webProcessMonitor.killed && !popupWebview.currentWebview.loading)
+            sourceComponent: SadPage {
+                webview: popupWebview
+                objectName: "overlaySadPage"
             }
-
-            Component.onCompleted: {
-
-                preferences.offlineWebApplicationCacheEnabled = true
-                preferences.javaEnabled = true
-                preferences.pluginsEnabled = true
-                preferences.localStorageEnabled = true
-                preferences.appCacheEnabled = true
-                preferences.allowFileAccessFromFileUrls = true
-                preferences.allowUniversalAccessFromFileUrls = true
-                preferences.javascriptCanAccessClipboard = true 
-
-                if (Qt.application.arguments[2] != undefined ) {
-                    console.warn("got argument: " + Qt.application.arguments[1])
-                    if(isValid(Qt.application.arguments[1]) == true) {
-                        url = Qt.application.arguments[1]
-                    }
-                }
-
-                console.warn("url is: " + url)
+            WebProcessMonitor {
+                id: webProcessMonitor
+                webview: popupWebview
             }
+            asynchronous: true
+          }
+       }
 
-            onGeolocationPermissionRequested: { request.accept() }
+   Loader {
+        id: downloadsViewLoader
 
+        anchors.fill: parent
+        active: false
+        asynchronous: true
+        Component.onCompleted: {
+            setSource("DownloadsPage.qml", {
+                          "downloadManager": Qt.binding(function () {return downloadHandlerLoader.item}),
+                          "incognito": incognito,
+                          "focus": true
+            })
+        }
+
+        Connections {
+            target: downloadsViewLoader.item
+            onDone: downloadsViewLoader.active = false
+        }
+
+        onStatusChanged: {
+            if (status == Loader.Ready) {
+                forceActiveFocus()
+            } else {
+                internal.resetFocus()
+            }
+        }
+    }
+
+            Loader {
+                id: contentHandlerLoader
+                source: "ContentHandler.qml"
+                asynchronous: true
+            }
+         
             Loader {
                 id: downloadLoader
                 source: "Downloader.qml"
@@ -222,78 +197,12 @@ MainView {
                 source: "ContentPickerDialog.qml"
                 asynchronous: true
             }
-            
-            filePicker: pickerComponent
-            
-        Loader {
-                anchors {
-                    fill: webview
 
-                }
-                active: webview &&
-                        (webProcessMonitor.crashed || (webProcessMonitor.killed && !webview.loading))
-                sourceComponent: SadPage {
-                    webview: webview
-                    objectName: "webviewSadPage"
-                }
-
-                WebProcessMonitor {
-                    id: webProcessMonitor
-                    webview: webview
-                }
+            Loader {
+                id: downloadDialogLoader
+                source: "ContentDownloadDialog.qml"
                 asynchronous: true
             }
-                Loader {
-            anchors {
-                fill: webview
-            }
-
-           sourceComponent: ErrorSheet {
-                visible: webview && webview.lastLoadFailed
-                url: webview ? webview.url : ""
-                onRefreshClicked: {
-                    if (webview)
-                        webview.reload()
-                }
-            }
-                asynchronous: true
-            }   
-            
-            function isValid (url){
-                var pattern = myPattern.split(',');
-                for (var i=0; i<pattern.length; i++) {
-                    var tmpsearch = pattern[i].replace(/\*/g,'(.*)')
-                    var search = tmpsearch.replace(/^https\?:\/\//g, '(http|https):\/\/');
-                    if (url.match(search)) {
-                       return true;
-                    }
-                }
-                return false;
-            }
-        }
-
-        NewProgressBar {
-            webview: webview
-            width: parent.width + units.gu(5)
-            z: 2
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-            }
-        }
-        
-    Component {
-        id: openDialogComponent
-
-        OpenDialog {
-            anchors.fill: parent
-     }
-   }      
-        
-    Component {
-        id: pickerComponent
-        PickerDialog {}
-    }
 
     Component {
         id: settingsComponent
@@ -337,32 +246,10 @@ MainView {
             }
         }
     }
-              
-    Connections {
-        target: UriHandler
-        onOpened: {
-            if (uris.length === 0 ) {
-                return;
-            }
-            webview.url = uris[0]
-            console.warn("uri-handler request")
-        }
-    }
-}
 
-    BottomMenu {
+     BottomMenu {
         id: bottomMenu
         width: parent.width
-    }
-
-    Connections {
-        target: DownloadInterceptor
-        onSuccess: {
-            PopupUtils.open(openDialogComponent, root, {'path': path});
-        }
-
-        onFail: {
-            PopupUtils.open(downloadFailedComponent, root, {'text': message});
-        }
-    }
- }
+     }
+   }
+ }    

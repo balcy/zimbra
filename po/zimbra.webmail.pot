@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zimbra Client\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-12 10:02+0000\n"
+"POT-Creation-Date: 2019-10-09 05:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,30 +17,73 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:121
-msgid "Copy Link"
+#: ../qml/SadPage.qml:27
+msgid "Oops, something went wrong."
 msgstr ""
 
-#: ../qml/Main.qml:129
-msgid "Share Link"
+#: ../qml/SadPage.qml:33
+msgid "Reload"
 msgstr ""
 
-#: ../qml/Main.qml:145
-msgid "Copy Image"
+#: ../qml/MediaAccessDialog.qml:31
+msgid "Permission"
 msgstr ""
 
-#: ../qml/Main.qml:151
-msgid "Download Image"
+#: ../qml/MediaAccessDialog.qml:38
+msgid "Allow this domain to access your camera and microphone?"
 msgstr ""
 
-#: ../qml/Main.qml:303
-msgid ""
-"Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
-"com)."
+#: ../qml/MediaAccessDialog.qml:39
+msgid "Allow this domain to access your camera?"
 msgstr ""
 
-#: ../qml/Main.qml:333 ../qml/OfflinePage.qml:63 ../qml/AboutPage.qml:41
-msgid "OK"
+#: ../qml/MediaAccessDialog.qml:40
+msgid "Allow this domain to access your microphone?"
+msgstr ""
+
+#. TRANSLATORS: %1 is the URL of the site requesting access to camera and/or microphone and %2 is the URL of the site that embeds it
+#: ../qml/MediaAccessDialog.qml:48
+msgid "%1 (embedded in %2)"
+msgstr ""
+
+#: ../qml/MediaAccessDialog.qml:72
+msgid "Yes"
+msgstr ""
+
+#: ../qml/MediaAccessDialog.qml:83
+msgid "No"
+msgstr ""
+
+#: ../qml/DownloadsPage.qml:28
+msgid "Downloads"
+msgstr ""
+
+#: ../qml/DownloadsPage.qml:42
+msgid "Confirm selection"
+msgstr ""
+
+#: ../qml/DownloadsPage.qml:66
+msgid "Select all"
+msgstr ""
+
+#: ../qml/DownloadsPage.qml:82
+msgid "Delete"
+msgstr ""
+
+#: ../qml/DownloadsPage.qml:248
+msgid "No downloads available"
+msgstr ""
+
+#: ../qml/actions/ShareLink.qml:22
+msgid "Share…"
+msgstr ""
+
+#: ../qml/actions/CopyLink.qml:22
+msgid "Copy link"
+msgstr ""
+
+#: ../qml/actions/CopyImage.qml:22
+msgid "Copy image"
 msgstr ""
 
 #: ../qml/actions/SaveImage.qml:22
@@ -51,86 +94,18 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: ../qml/actions/ShareLink.qml:22
-msgid "Share…"
-msgstr ""
-
-#: ../qml/actions/CopyImage.qml:22
-msgid "Copy image"
-msgstr ""
-
-#: ../qml/actions/CopyLink.qml:22
-msgid "Copy link"
-msgstr ""
-
-#: ../qml/ErrorSheet.qml:18
-msgid "Network Error"
-msgstr ""
-
-#: ../qml/ErrorSheet.qml:23
-msgid "It appears you are having trouble connecting your Zimbra Server."
-msgstr ""
-
-#: ../qml/ErrorSheet.qml:29
+#: ../qml/Main.qml:212
 msgid ""
-"Please check your network settings and try reconnect to your Zimbra Server."
+"Please, introduce the FQDN of your Zimbra server<br>(e.g. zimbra.example."
+"com)."
 msgstr ""
 
-#: ../qml/ErrorSheet.qml:37
-msgid "Reconnect"
-msgstr ""
-
-#: ../qml/QrCodeDialog.qml:11 ../qml/DownloadingDialog.qml:31
-#: ../qml/DownloadingDialog.qml:50
-msgid "Close"
-msgstr ""
-
-#: ../qml/SadPage.qml:27
-msgid "Oops, something went wrong. Reload from bottom menu."
-msgstr ""
-
-#: ../qml/DownloadingDialog.qml:9
-msgid "Download in progress"
-msgstr ""
-
-#: ../qml/DownloadingDialog.qml:29
-msgid "Cancel"
-msgstr ""
-
-#: ../qml/OfflinePage.qml:9
-msgid "How to Enable Offline Mode on PC Client"
-msgstr ""
-
-#: ../qml/OfflinePage.qml:13
-msgid ""
-"If you use the Zimbra PC Web Client in Chrome or Firefox, you can work "
-"offline with access to one month of data!"
-msgstr ""
-
-#: ../qml/OfflinePage.qml:18
-msgid "To enable Offline Mode:"
-msgstr ""
-
-#: ../qml/OfflinePage.qml:23
-msgid ""
-"1. Open the user menu in the top right corner of the Zimbra Web Client, and "
-"select Offline Mode, as shown below."
-msgstr ""
-
-#: ../qml/OfflinePage.qml:34
-msgid "2. Select Allow offline mode, and click OK."
-msgstr ""
-
-#: ../qml/OfflinePage.qml:45
-msgid "3. Click Yes."
-msgstr ""
-
-#: ../qml/OfflinePage.qml:56
-msgid "4. Done."
+#: ../qml/Main.qml:242 ../qml/AboutPage.qml:41
+msgid "OK"
 msgstr ""
 
 #: ../qml/AboutPage.qml:9
-msgid "About Zimbra Client v2.9"
+msgid "About Zimbra Client "
 msgstr ""
 
 #: ../qml/AboutPage.qml:10
