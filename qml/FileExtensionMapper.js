@@ -1,29 +1,16 @@
-/*
- * Copyright 2014 Canonical Ltd.
- *
- * This file is part of webbrowser-app.
- *
- * webbrowser-app is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; version 3.
- *
- * webbrowser-app is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+'use strict';
+
+function getExtension(filename) {
+    var filenameParts = filename.split(".");
+    if (filenameParts.length === 1 || (filenameParts[0] === "" && filenameParts.length === 2)) {
+        return ""
+    }
+    return filenameParts.pop().toLowerCase();
+}
 
 // Constructed from /etc/mime.types
 function filenameToContentType(filename) {
-    var filenameParts = filename.split(".");
-    if(filenameParts.length === 1 || (filenameParts[0] === "" && filenameParts.length === 2)) {
-        return ContentType.Unknown;
-    }
-    var ext = filenameParts.pop().toLowerCase();
-    switch(ext) {
+    switch(getExtension(filename)) {
         case "art":
         case "bmp":
         case "cdr":
@@ -156,6 +143,8 @@ function filenameToContentType(filename) {
         case "cxx":
         case "d":
         case "diff":
+        case "doc":
+        case "docx":
         case "etx":
         case "gcd":
         case "h":
@@ -176,6 +165,9 @@ function filenameToContentType(filename) {
         case "ly":
         case "mml":
         case "moc":
+        case "odp":
+        case "ods":
+        case "odt":
         case "p":
         case "pas":
         case "patch":
@@ -183,6 +175,8 @@ function filenameToContentType(filename) {
         case "pl":
         case "pm":
         case "pot":
+        case "ppt":
+        case "pptx":
         case "py":
         case "rtx":
         case "scala":
@@ -205,6 +199,8 @@ function filenameToContentType(filename) {
         case "wml":
         case "wmls":
         case "wsc":
+        case "xls":
+        case "xlsx":
             return ContentType.Documents;
         case "epub":
         case "mobi":
@@ -217,3 +213,4 @@ function filenameToContentType(filename) {
             return ContentType.Unknown;
     }
 }
+

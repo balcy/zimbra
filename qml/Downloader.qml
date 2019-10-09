@@ -71,3 +71,4 @@ Item {
         return url.toString().search(/[^\/]+:\/\/[^\/]*7digital.com\//) !== -1
     }
 }
+
