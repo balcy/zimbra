@@ -17,6 +17,7 @@ import "."
 
         property var activeTransfer
         property bool allowMultipleFiles
+        property book acceptTypes
         
         signal accept(var files)
         signal reject()
@@ -111,4 +112,3 @@ import "."
         }
     }
 //}
-

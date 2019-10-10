@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Window 2.2
 import Morph.Web 0.1
 import QtWebEngine 1.7
 import Ubuntu.Components 1.3
@@ -102,6 +103,8 @@ MainView {
                 zoomFactor: 2.5
                 url: settings.myUrl
 
+            signal showDownloadDialog(string downloadId, var contentType, var downloader, string filename, string mimeType)
+
             onFileDialogRequested: function(request) {
 
             switch (request.mode)
@@ -122,7 +125,7 @@ MainView {
                 fileDialogMultiple.reject.connect(request.dialogReject);
                 break;
 
-            case FilealogRequest.FileModeUploadFolder:
+            case FileDialogRequest.FileModeUploadFolder:
             case FileDialogRequest.FileModeSave:
                 request.accepted = false;
                 break;
@@ -130,9 +133,19 @@ MainView {
 
         }
 
-        onNewViewRequested: function(request) {
-                Qt.openUrlExternally(request.requestedUrl);
-            }
+    onShowDownloadDialog: {
+       if (downloadDialogLoader.status === Loader.Ready) {
+           var downloadDialog =
+                   PopupUtils.open(downloadDialogLoader.item,
+                                   webappWebview,
+                                   {"contentType" : contentType,
+                                    "downloadId" : downloadId,
+                                    "singleDownload" : downloader,
+                                    "filename" : filename,
+                                    "mimeType" : mimeType})
+           downloadDialog.startDownload.connect(startDownload)
+        }
+    }
 
         Loader {
             anchors {
