@@ -74,23 +74,34 @@ MainView {
             fill: parent
             bottom: parent.bottom
         }
+
+        WebEngineProfile {
+        id: webContext
+
+        property alias userAgent: webContext.httpUserAgent
+        property alias dataPath: webContext.persistentStoragePath
+
+        dataPath: dataLocation
+
+        userAgent: myUA
+
+        persistentCookiesPolicy: WebEngineProfile.ForcePersistentCookies
+
+        onDownloadRequested: {
+            console.log("a download was requested with path %1".arg(download.path))
+            download.accept();
+        }
+
+        onDownloadFinished: {
+            console.log("a download was finished with path %1".arg(download.path))
+        }
+
+        }
                    
         WebEngineView {
             id: webview
 
-            WebEngineProfile {
-            id: webContext 
-
-            property alias userAgent: webContext.httpUserAgent
-            property alias dataPath: webContext.persistentStoragePath
-
-            dataPath: dataLocation
-
-            userAgent: myUA
-
-            persistentCookiesPolicy: WebEngineProfile.ForcePersistentCookies
-
-            }
+            profile: webContext
 
             anchors {
                 fill: parent
